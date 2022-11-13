@@ -9,10 +9,6 @@ class Ticket {
     this.prize;
   }
 
-  printTicketNumbers() {
-    Console.print(this.#numbers);
-  }
-
   decidePrize(lottoNumbers, lottoBonusNumber) {
     if (this.compareNumber(lottoNumbers) === 3) this.prize = three;
     if (this.compareNumber(lottoNumbers) === 4) this.prize = four;
@@ -48,6 +44,10 @@ class Ticket {
     }
 
     return this.ticketBonusNumber;
+  }
+
+  printTicketNumbers() {
+    Console.print(this.#numbers);
   }
 }
 
