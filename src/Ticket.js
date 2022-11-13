@@ -1,4 +1,4 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 
 class Ticket {
   #numbers;
@@ -7,6 +7,23 @@ class Ticket {
     this.#numbers = numbers;
     this.ticketBonusNumber;
     this.prize;
+  }
+
+  printTicketNumbers() {
+    Console.print(this.#numbers);
+  }
+
+  decidePrize(lottoNumbers, lottoBonusNumber) {
+    if (this.compareNumber(lottoNumbers) === 3) this.prize = three;
+    if (this.compareNumber(lottoNumbers) === 4) this.prize = four;
+    if (this.compareNumber(lottoNumbers) === 5) {
+      const randomNumber = this.makeBonusNumber();
+      if (lottoBonusNumber === randomNumber) this.prize = fiveBonus;
+      if (lottoBonusNumber !== randomNumber) this.prize = five;
+    }
+    if (this.compareNumber(lottoNumbers) === 6) this.prize = six;
+
+    return this.prize;
   }
 
   compareNumber(lottoNumbers) {
@@ -31,19 +48,6 @@ class Ticket {
     }
 
     return this.ticketBonusNumber;
-  }
-
-  decidePrize(lottoNumbers, lottoBonusNumber) {
-    if (this.compareNumber(lottoNumbers) === 3) this.prize = three;
-    if (this.compareNumber(lottoNumbers) === 4) this.prize = four;
-    if (this.compareNumber(lottoNumbers) === 5) {
-      const randomNumber = this.makeBonusNumber();
-      if (lottoBonusNumber === randomNumber) this.prize = fiveBonus;
-      if (lottoBonusNumber !== randomNumber) this.prize = five;
-    }
-    if (this.compareNumber(lottoNumbers) === 6) this.prize = six;
-
-    return this.prize;
   }
 }
 

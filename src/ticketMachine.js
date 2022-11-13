@@ -6,7 +6,11 @@ class TicketMachine {
     this.ticketList = [];
   }
 
-  makeTickets(userMoney) {
+  printTickets() {
+    this.ticketList.forEach((ticket) => ticket.printTicketNumbers());
+  }
+
+  makeTicketList(userMoney) {
     const countOfTickets = this.countOfTickets(userMoney);
 
     for (let count = 1; count <= countOfTickets; count++) {
