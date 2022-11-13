@@ -5,17 +5,18 @@ class Ticket {
 
   constructor(numbers) {
     this.#numbers = numbers;
-    this.bonusNumber;
+    this.ticketBonusNumber;
+    this.prize;
   }
 
-  compareNumber(userNumbers) {
-    let countSame = 0;
+  compareNumber(lottoNumbers) {
+    let sameNumberCount = 0;
 
-    userNumbers.map((userNumber) => {
-      if (this.#numbers.includes(userNumber)) countSame += 1;
+    lottoNumbers.map((lottoNumber) => {
+      if (this.#numbers.includes(lottoNumber)) sameNumberCount += 1;
     });
 
-    return countSame;
+    return sameNumberCount;
   }
 
   makeBonusNumber() {
@@ -26,10 +27,23 @@ class Ticket {
     }
 
     if (!this.#numbers.includes(randomNumber)) {
-      this.bonusNumber = randomNumber;
+      this.ticketBonusNumber = randomNumber;
     }
 
-    return this.bonusNumber;
+    return this.ticketBonusNumber;
+  }
+
+  decidePrize(lottoNumbers, lottoBonusNumber) {
+    if (this.compareNumber(lottoNumbers) === 3) this.prize = three;
+    if (this.compareNumber(lottoNumbers) === 4) this.prize = four;
+    if (this.compareNumber(lottoNumbers) === 5) {
+      const randomNumber = this.makeBonusNumber();
+      if (lottoBonusNumber === randomNumber) this.prize = fiveBonus;
+      if (lottoBonusNumber !== randomNumber) this.prize = five;
+    }
+    if (this.compareNumber(lottoNumbers) === 6) this.prize = six;
+
+    return this.prize;
   }
 }
 
