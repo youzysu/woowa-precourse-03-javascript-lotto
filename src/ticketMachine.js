@@ -18,6 +18,13 @@ class ticketMachine {
 
     return true;
   }
+
+  makeTicket() {
+    const TicketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (a, b) => a - b
+    );
+    return new Ticket(TicketNumbers);
+  }
 }
 
 module.exports = ticketMachine;
