@@ -1,7 +1,26 @@
 const { Random } = require('@woowacourse/mission-utils');
 
-class ticketMachine {
-  ticketAmount(userMoney) {
+class TicketMachine {
+  constructor(userMoney) {
+    this.isValidMoney(userMoney);
+    this.ticketList = [];
+  }
+
+  makeTickets(userMoney) {
+    const countOfTickets = this.countOfTickets(userMoney);
+
+    for (let count = 1; count <= countOfTickets; count++) {
+      const TicketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+        (a, b) => a - b
+      );
+      const ticket = new Ticket(lottoNumbers);
+      this.ticketList.push(ticket);
+    }
+
+    return this.ticketList;
+  }
+
+  countOfTickets(userMoney) {
     if (this.isValidMoney(userMoney)) {
       return userMoney / 1000;
     }
@@ -18,13 +37,6 @@ class ticketMachine {
 
     return true;
   }
-
-  makeTicket() {
-    const TicketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-      (a, b) => a - b
-    );
-    return new Ticket(TicketNumbers);
-  }
 }
 
-module.exports = ticketMachine;
+module.exports = TicketMachine;
