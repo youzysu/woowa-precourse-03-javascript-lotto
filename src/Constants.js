@@ -30,6 +30,9 @@ const PROFIT = {
 const ERROR = {
   NOT_THOUSANDS: '[ERROR] 1000원 단위의 금액을 입력해주세요.',
   LESS_MONEY: '[ERROR] 1000원보다 큰 금액을 입력해주세요.',
+  DUPLICATED_NUMBER: '[ERROR] 로또 번호 중 중복된 번호가 있습니다.',
+  LESS_NUMBER: '[ERROR] 로또 번호는 6개여야 합니다.',
+  SAME_NUMBER: '[ERROR] 로또 번호 중 동일한 번호가 있습니다.',
 };
 
 module.exports = {

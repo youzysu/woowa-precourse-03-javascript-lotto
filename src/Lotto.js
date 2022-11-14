@@ -1,3 +1,5 @@
+const { MESSAGE } = require('./Constants');
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,23 @@ class Lotto {
   }
 
   validate(numbers) {
+    const removeDuplicate = new Set(numbers);
+
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(MESSAGE.LESS_NUMBER);
+    }
+
+    if (removeDuplicate.size !== numbers.length) {
+      throw new Error(MESSAGE.DUPLICATED_NUMBER);
     }
   }
 
-  // TODO: 추가 기능 구현
+  isValidBonusNumber(userNumber) {
+    if (this.#numbers.includes(userNumber)) {
+      throw new Error(MESSAGE.SAME_NUMBER);
+    }
+    return true;
+  }
 }
 
 module.exports = Lotto;
