@@ -1,7 +1,7 @@
 const WinningLotto = require('./WinningLotto');
 const LottoMachine = require('./LottoMachine');
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE, PROFIT } = require('./Constants');
+const { MESSAGE, PROFIT, RESULT } = require('./Constants');
 
 class Controller {
   constructor() {
@@ -58,15 +58,14 @@ class Controller {
   printResult() {
     this.calculateProfit();
     const profitRate = ((this.profit / this.countOfLottos) * 100).toFixed(1);
-    Console.print(
-      MESSAGE.PRINT_RESULT +
-        `3개 일치 (5,000원) - ${this.result.three}개\n` +
-        `4개 일치 (50,000원) - ${this.result.four}개\n` +
-        `5개 일치 (1,500,000원) - ${this.result.five}개\n` +
-        `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.result.fiveBonus}개\n` +
-        `6개 일치 (2,000,000,000원) - ${this.result.six}개\n` +
-        `총 수익률은 ${profitRate}%입니다.`
-    );
+
+    Console.print(MESSAGE.PRINT_RESULT);
+    Console.print(RESULT.THREE + `${this.result.three}` + RESULT.UNIT);
+    Console.print(RESULT.FOUR + `${this.result.four}` + RESULT.UNIT);
+    Console.print(RESULT.FIVE + `${this.result.five}` + RESULT.UNIT);
+    Console.print(RESULT.FIVE_BONUS + `${this.result.fiveBonus}` + RESULT.UNIT);
+    Console.print(RESULT.SIX + `${this.result.six}` + RESULT.UNIT);
+    Console.print(RESULT.PROFIT + `${profitRate}` + RESULT.ENDING);
     Console.close();
   }
 

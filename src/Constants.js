@@ -4,7 +4,17 @@ const MESSAGE = {
   ENTER_USER_NUMBER: '\n당첨 번호를 입력해 주세요.\n',
   ENTER_USER_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
   PRINT_RESULT: '\n당첨 통계\n---\n',
-  COUNT_UNIT: '개\n',
+};
+
+const RESULT = {
+  THREE: '3개 일치 (5,000원) - ',
+  FOUR: '4개 일치 (50,000원) - ',
+  FIVE: '5개 일치 (1,500,000원) - ',
+  FIVE_BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  SIX: '6개 일치 (2,000,000,000원) - ',
+  UNIT: '개\n',
+  PROFIT: '총 수익률은 ',
+  ENDING: '%입니다.',
 };
 
 const PRIZE = {
@@ -37,4 +47,5 @@ module.exports = {
   PROFIT,
   PRIZE,
   ERROR,
+  RESULT,
 };
