@@ -55,26 +55,6 @@ class Controller {
     });
   }
 
-  calculateResult() {
-    this.lottoList.forEach((lotto) => {
-      const lottoResult = lotto.decidePrize(
-        this.winningLottoNumbers,
-        this.winningLottoBonusNumber
-      );
-      this.result[lottoResult] += 1;
-    });
-  }
-
-  calculateProfit() {
-    this.calculateResult();
-    this.profit =
-      PROFIT.THREE * this.result.three +
-      PROFIT.FOUR * this.result.four +
-      PROFIT.FIVE * this.result.five +
-      PROFIT.FIVE_BONUS * this.result.fiveBonus +
-      PROFIT.SIX * this.result.six;
-  }
-
   printResult() {
     this.calculateProfit();
     const profitRate = ((this.profit / this.countOfLottos) * 100).toFixed(1);
@@ -88,6 +68,26 @@ class Controller {
         `총 수익률은 ${profitRate}%입니다.`
     );
     Console.close();
+  }
+
+  calculateProfit() {
+    this.calculateResult();
+    this.profit =
+      PROFIT.THREE * this.result.three +
+      PROFIT.FOUR * this.result.four +
+      PROFIT.FIVE * this.result.five +
+      PROFIT.FIVE_BONUS * this.result.fiveBonus +
+      PROFIT.SIX * this.result.six;
+  }
+
+  calculateResult() {
+    this.lottoList.forEach((lotto) => {
+      const lottoResult = lotto.decidePrize(
+        this.winningLottoNumbers,
+        this.winningLottoBonusNumber
+      );
+      this.result[lottoResult] += 1;
+    });
   }
 }
 
