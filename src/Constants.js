@@ -17,22 +17,6 @@ const RESULT = {
   ENDING: '%입니다.',
 };
 
-const PRIZE = {
-  THREE: 'three',
-  FOUR: 'four',
-  FIVE: 'five',
-  FIVE_BONUS: 'fiveBonus',
-  SIX: 'six',
-};
-
-const PROFIT = {
-  THREE: 5,
-  FOUR: 50,
-  FIVE: 1500,
-  FIVE_BONUS: 30000,
-  SIX: 2000000,
-};
-
 const ERROR = {
   NOT_THOUSANDS: '[ERROR] 1000원 단위의 금액을 입력해주세요.',
   LESS_MONEY: '[ERROR] 1000원보다 큰 금액을 입력해주세요.',
@@ -44,8 +28,6 @@ const ERROR = {
 
 module.exports = {
   MESSAGE,
-  PROFIT,
-  PRIZE,
   ERROR,
   RESULT,
 };

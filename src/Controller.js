@@ -1,7 +1,7 @@
 const WinningLotto = require('./WinningLotto');
 const LottoMachine = require('./LottoMachine');
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE, PROFIT, RESULT } = require('./Constants');
+const { MESSAGE, RESULT } = require('./Constants');
 
 class Controller {
   constructor() {
@@ -11,7 +11,13 @@ class Controller {
     this.winningLotto;
     this.winningLottoNumbers;
     this.winningLottoBonusNumber;
-    this.result = { three: 0, four: 0, five: 0, fiveBonus: 0, six: 0 };
+    this.result = {
+      three: 0,
+      four: 0,
+      five: 0,
+      fiveBonus: 0,
+      six: 0,
+    };
     this.profit;
   }
 
@@ -70,13 +76,17 @@ class Controller {
   }
 
   calculateProfit() {
+    const [threeProfit, fourProfit, fiveProfit, fiveBonusProfit, sixProfit] = [
+      5, 50, 1500, 30000, 2000000,
+    ];
+
     this.calculateResult();
     this.profit =
-      PROFIT.THREE * this.result.three +
-      PROFIT.FOUR * this.result.four +
-      PROFIT.FIVE * this.result.five +
-      PROFIT.FIVE_BONUS * this.result.fiveBonus +
-      PROFIT.SIX * this.result.six;
+      threeProfit * this.result.three +
+      fourProfit * this.result.four +
+      fiveProfit * this.result.five +
+      fiveBonusProfit * this.result.fiveBonus +
+      sixProfit * this.result.six;
   }
 
   calculateResult() {
