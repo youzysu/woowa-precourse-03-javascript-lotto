@@ -1,5 +1,6 @@
 const Ticket = require('./Ticket');
 const { Random } = require('@woowacourse/mission-utils');
+const { TICKET, ERROR } = require('./Constants');
 
 class TicketMachine {
   constructor() {
@@ -23,19 +24,19 @@ class TicketMachine {
 
   countOfTickets(userMoney) {
     if (this.isValidMoney(userMoney)) {
-      this.ticketCount = userMoney / 1000;
+      this.ticketCount = userMoney / TICKET.PRICE;
     }
 
     return this.ticketCount;
   }
 
   isValidMoney(userMoney) {
-    if (userMoney % 1000 !== 0) {
-      throw new Error('[ERROR]');
+    if (userMoney % TICKET.PRICE !== 0) {
+      throw new Error(ERROR.NOT_THOUSANDS);
     }
 
-    if (userMoney < 1000) {
-      throw new Error('[ERROR]');
+    if (userMoney < TICKET.PRICE) {
+      throw new Error(ERROR.LESS_MONEY);
     }
 
     return true;
