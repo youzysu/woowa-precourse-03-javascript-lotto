@@ -29,7 +29,7 @@ class Controller {
   }
 
   printTicketCount() {
-    Console.print(`${this.ticketCount}` + MESSAGE.PRINT_TICKET_COUNT);
+    this.ticketMachine.printTicketCount();
     this.ticketMachine.printTickets();
     this.inputUserNumbers();
   }
@@ -55,6 +55,26 @@ class Controller {
     });
   }
 
+  calculateResult() {
+    this.ticketList.forEach((ticket) => {
+      const ticketResult = ticket.decidePrize(
+        this.lottoNumbers,
+        this.bonusLottoNumber
+      );
+      this.result[ticketResult] += 1;
+    });
+  }
+
+  calculateProfit() {
+    this.calculateResult();
+    this.profit =
+      PROFIT.THREE * this.result.three +
+      PROFIT.FOUR * this.result.four +
+      PROFIT.FIVE * this.result.five +
+      PROFIT.FIVE_BONUS * this.result.fiveBonus +
+      PROFIT.SIX * this.result.six;
+  }
+
   printResult() {
     this.calculateProfit();
     const profitRate = ((this.profit / this.ticketCount) * 100).toFixed(1);
@@ -68,26 +88,6 @@ class Controller {
         `총 수익률은 ${profitRate}%입니다.`
     );
     Console.close();
-  }
-
-  calculateProfit() {
-    this.calculateResult();
-    this.profit =
-      PROFIT.THREE * this.result.three +
-      PROFIT.FOUR * this.result.four +
-      PROFIT.FIVE * this.result.five +
-      PROFIT.FIVE_BONUS * this.result.fiveBonus +
-      PROFIT.SIX * this.result.six;
-  }
-
-  calculateResult() {
-    this.ticketList.forEach((ticket) => {
-      const ticketResult = ticket.decidePrize(
-        this.lottoNumbers,
-        this.bonusLottoNumber
-      );
-      this.result[ticketResult] += 1;
-    });
   }
 }
 

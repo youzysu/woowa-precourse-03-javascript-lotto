@@ -1,11 +1,15 @@
 const Ticket = require('./Ticket');
-const { Random } = require('@woowacourse/mission-utils');
-const { TICKET, ERROR } = require('./Constants');
+const { Console, Random } = require('@woowacourse/mission-utils');
+const { TICKET, ERROR, MESSAGE } = require('./Constants');
 
 class TicketMachine {
   constructor() {
     this.ticketCount;
     this.ticketList = [];
+  }
+
+  printTicketCount() {
+    Console.print(`${this.ticketCount}` + MESSAGE.PRINT_TICKET_COUNT);
   }
 
   printTickets() {
