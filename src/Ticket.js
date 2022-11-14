@@ -1,4 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
+const { PRIZE } = require('./Constants');
 
 class Ticket {
   #numbers;
@@ -10,14 +11,14 @@ class Ticket {
   }
 
   decidePrize(lottoNumbers, lottoBonusNumber) {
-    if (this.compareNumber(lottoNumbers) === 3) this.prize = three;
-    if (this.compareNumber(lottoNumbers) === 4) this.prize = four;
+    if (this.compareNumber(lottoNumbers) === 3) this.prize = PRIZE.THREE;
+    if (this.compareNumber(lottoNumbers) === 4) this.prize = PRIZE.FOUR;
     if (this.compareNumber(lottoNumbers) === 5) {
       const randomNumber = this.makeBonusNumber();
-      if (lottoBonusNumber === randomNumber) this.prize = fiveBonus;
-      if (lottoBonusNumber !== randomNumber) this.prize = five;
+      if (lottoBonusNumber === randomNumber) this.prize = PRIZE.FIVE_BONUS;
+      if (lottoBonusNumber !== randomNumber) this.prize = PRIZE.FIVE;
     }
-    if (this.compareNumber(lottoNumbers) === 6) this.prize = six;
+    if (this.compareNumber(lottoNumbers) === 6) this.prize = PRIZE.SIX;
 
     return this.prize;
   }
