@@ -46,8 +46,9 @@ class Ticket {
     return this.ticketBonusNumber;
   }
 
-  printTicketNumbers() {
-    Console.print(this.#numbers);
+  printNumbers() {
+    const sorted = this.#numbers.sort((a, b) => a - b).join(', ');
+    Console.print(`[${sorted}]`);
   }
 }
 
