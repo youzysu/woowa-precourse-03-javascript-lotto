@@ -1,16 +1,16 @@
-const Lotto = require('./Lotto');
-const TicketMachine = require('./ticketMachine');
+const WinningLotto = require('./WinningLotto');
+const LottoMachine = require('./LottoMachine');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE, PROFIT } = require('./Constants');
 
 class Controller {
   constructor() {
-    this.ticketMachine = new TicketMachine();
-    this.ticketCount;
-    this.ticketList;
-    this.lotto;
-    this.lottoNumbers;
-    this.bonusLottoNumber;
+    this.lottoMachine = new LottoMachine();
+    this.countOfLottos;
+    this.lottoList;
+    this.winningLotto;
+    this.winningLottoNumbers;
+    this.winningLottoBonusNumber;
     this.result = { three: 0, four: 0, five: 0, fiveBonus: 0, six: 0 };
     this.profit;
   }
@@ -21,24 +21,24 @@ class Controller {
 
   inputUserMoney() {
     Console.readLine(MESSAGE.ENTER_USER_MONEY, (userMoney) => {
-      this.ticketCount = this.ticketMachine.countOfTickets(userMoney);
-      this.ticketList = this.ticketMachine.makeTicketList(userMoney);
+      this.countOfLottos = this.lottoMachine.countOfLottos(userMoney);
+      this.lottoList = this.lottoMachine.makeLottoList(userMoney);
 
-      this.printTicketCount();
+      this.printLottoCount();
     });
   }
 
-  printTicketCount() {
-    this.ticketMachine.printTicketCount();
-    this.ticketMachine.printTickets();
+  printLottoCount() {
+    this.lottoMachine.printLottoCount();
+    this.lottoMachine.printLottos();
     this.inputUserNumbers();
   }
 
   inputUserNumbers() {
     Console.readLine(MESSAGE.ENTER_USER_NUMBER, (userInput) => {
       const userInputNumbers = userInput.split(',').map((str) => Number(str));
-      this.lotto = new Lotto(userInputNumbers);
-      this.lottoNumbers = userInputNumbers;
+      this.winningLotto = new WinningLotto(userInputNumbers);
+      this.winningLottoNumbers = userInputNumbers;
 
       this.inputUserBonusNumber();
     });
@@ -47,8 +47,8 @@ class Controller {
   inputUserBonusNumber() {
     Console.readLine(MESSAGE.ENTER_USER_BONUS_NUMBER, (userInput) => {
       const userInputNumber = Number(userInput);
-      if (this.lotto.isValidBonusNumber(userInputNumber)) {
-        this.bonusLottoNumber = userInputNumber;
+      if (this.winningLotto.isValidBonusNumber(userInputNumber)) {
+        this.winningLottoBonusNumber = userInputNumber;
       }
 
       this.printResult();
@@ -56,12 +56,12 @@ class Controller {
   }
 
   calculateResult() {
-    this.ticketList.forEach((ticket) => {
-      const ticketResult = ticket.decidePrize(
-        this.lottoNumbers,
-        this.bonusLottoNumber
+    this.lottoList.forEach((lotto) => {
+      const lottoResult = lotto.decidePrize(
+        this.winningLottoNumbers,
+        this.winningLottoBonusNumber
       );
-      this.result[ticketResult] += 1;
+      this.result[lottoResult] += 1;
     });
   }
 
@@ -77,7 +77,7 @@ class Controller {
 
   printResult() {
     this.calculateProfit();
-    const profitRate = ((this.profit / this.ticketCount) * 100).toFixed(1);
+    const profitRate = ((this.profit / this.countOfLottos) * 100).toFixed(1);
     Console.print(
       MESSAGE.PRINT_RESULT +
         `3개 일치 (5,000원) - ${this.result.three}개\n` +
