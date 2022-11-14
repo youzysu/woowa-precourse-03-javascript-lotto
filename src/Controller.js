@@ -91,11 +91,11 @@ class Controller {
 
   calculateResult() {
     this.lottoList.forEach((lotto) => {
-      const lottoResult = lotto.decidePrize(
+      const lottoPrize = lotto.decidePrize(
         this.winningLottoNumbers,
         this.winningLottoBonusNumber
       );
-      this.result[lottoResult] += 1;
+      this.result[lottoPrize] += 1;
     });
   }
 }
