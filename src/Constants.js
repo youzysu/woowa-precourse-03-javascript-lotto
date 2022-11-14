@@ -29,6 +29,7 @@ const ERROR = {
   DUPLICATED_NUMBER: '[ERROR] 로또 번호 중 중복된 번호가 있습니다.',
   LESS_NUMBER: '[ERROR] 로또 번호는 6개여야 합니다.',
   SAME_NUMBER: '[ERROR] 로또 번호 중 동일한 번호가 있습니다.',
+  SCOPE_OUT: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
 };
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { MESSAGE } = require('./Constants');
+const { ERROR } = require('./Constants');
 
 class WinningLotto {
   #numbers;
@@ -9,20 +9,36 @@ class WinningLotto {
   }
 
   validate(numbers) {
+    this.lengthValidity(numbers);
+    this.duplicateCheck(numbers);
+    this.isValidScope(numbers);
+  }
+
+  lengthValidity(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error(ERROR.LESS_NUMBER);
+    }
+  }
+
+  duplicateCheck(numbers) {
     const removeDuplicate = new Set(numbers);
 
-    if (numbers.length !== 6) {
-      throw new Error(MESSAGE.LESS_NUMBER);
-    }
-
     if (removeDuplicate.size !== numbers.length) {
-      throw new Error(MESSAGE.DUPLICATED_NUMBER);
+      throw new Error(ERROR.DUPLICATED_NUMBER);
     }
+  }
+
+  isValidScope(numbers) {
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error(ERROR.SCOPE_OUT);
+      }
+    });
   }
 
   isValidBonusNumber(bonusNumber) {
     if (this.#numbers.includes(bonusNumber)) {
-      throw new Error(MESSAGE.SAME_NUMBER);
+      throw new Error(ERROR.SAME_NUMBER);
     }
     return true;
   }
