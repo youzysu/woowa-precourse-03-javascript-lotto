@@ -1,30 +1,54 @@
-const { MESSAGE } = require('./Constants');
+const { Random, Console } = require('@woowacourse/mission-utils');
+const { PRIZE } = require('./Constants');
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.validate(numbers);
     this.#numbers = numbers;
+    this.lottoBonusNumber;
+    this.prize;
   }
 
-  validate(numbers) {
-    const removeDuplicate = new Set(numbers);
+  decidePrize(userNumbers, userBonusNumber) {
+    if (this.compareNumber(userNumbers) === 3) this.prize = PRIZE.THREE;
+    if (this.compareNumber(userNumbers) === 4) this.prize = PRIZE.FOUR;
+    if (this.compareNumber(userNumbers) === 5) {
+      this.makeBonusNumber();
+      if (userBonusNumber === this.lottoBonusNumber)
+        this.prize = PRIZE.FIVE_BONUS;
+      if (userBonusNumber !== this.lottoBonusNumber) this.prize = PRIZE.FIVE;
+    }
+    if (this.compareNumber(userNumbers) === 6) this.prize = PRIZE.SIX;
 
-    if (numbers.length !== 6) {
-      throw new Error(MESSAGE.LESS_NUMBER);
+    return this.prize;
+  }
+
+  compareNumber(lottoNumbers) {
+    let sameNumberCount = 0;
+
+    lottoNumbers.map((lottoNumber) => {
+      if (this.#numbers.includes(lottoNumber)) sameNumberCount += 1;
+    });
+
+    return sameNumberCount;
+  }
+
+  makeBonusNumber() {
+    const randomNumber = Random.pickNumberInRange(1, 45);
+
+    if (this.#numbers.includes(randomNumber)) {
+      this.makeBonusNumber();
     }
 
-    if (removeDuplicate.size !== numbers.length) {
-      throw new Error(MESSAGE.DUPLICATED_NUMBER);
+    if (!this.#numbers.includes(randomNumber)) {
+      this.lottoBonusNumber = randomNumber;
     }
   }
 
-  isValidBonusNumber(userNumber) {
-    if (this.#numbers.includes(userNumber)) {
-      throw new Error(MESSAGE.SAME_NUMBER);
-    }
-    return true;
+  printNumbers() {
+    const sorted = this.#numbers.sort((a, b) => a - b).join(', ');
+    Console.print(`[${sorted}]`);
   }
 }
 
