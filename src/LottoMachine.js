@@ -9,14 +9,6 @@ class LottoMachine {
     this.lottoList = [];
   }
 
-  printLottoCount() {
-    Console.print(`${this.countOfLottos}` + MESSAGE.PRINT_LOTTO_COUNT);
-  }
-
-  printLottos() {
-    this.lottoList.forEach((lotto) => lotto.printNumbers());
-  }
-
   makeLottoList(userMoney) {
     for (let count = 1; count <= this.countOfLottos; count++) {
       const LottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
