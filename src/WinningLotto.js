@@ -12,6 +12,7 @@ class WinningLotto {
     this.lengthValidity(numbers);
     this.duplicateCheck(numbers);
     this.isValidScope(numbers);
+    this.isValidType(numbers);
   }
 
   lengthValidity(numbers) {
@@ -36,9 +37,23 @@ class WinningLotto {
     });
   }
 
+  isValidType(numbers) {
+    numbers.forEach((number) => {
+      if (!new RegExp('^[0-9]+$').test(number)) {
+        throw new Error(ERROR.TYPE);
+      }
+    });
+  }
+
   isValidBonusNumber(bonusNumber) {
     if (this.#numbers.includes(bonusNumber)) {
       throw new Error(ERROR.SAME_NUMBER);
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(ERROR.SCOPE_OUT);
+    }
+    if (!new RegExp('^[0-9]+$').test(bonusNumber)) {
+      throw new Error(ERROR.TYPE);
     }
     return true;
   }
