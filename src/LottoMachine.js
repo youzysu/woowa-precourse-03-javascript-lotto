@@ -5,7 +5,7 @@ const { ERROR, MESSAGE } = require('./Constants');
 class LottoMachine {
   constructor() {
     this.lottoPrice = 1000;
-    this.countOfLottos;
+    this.countOfLottos = 0;
     this.lottoList = [];
   }
 
@@ -19,7 +19,7 @@ class LottoMachine {
     return this.lottoList;
   }
 
-  countOfLottos(userMoney) {
+  countLottos(userMoney) {
     if (this.isValidMoney(userMoney)) {
       this.countOfLottos = userMoney / this.lottoPrice;
     }

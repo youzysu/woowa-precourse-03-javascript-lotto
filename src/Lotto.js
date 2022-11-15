@@ -24,11 +24,11 @@ class Lotto {
     return this.prize;
   }
 
-  compareNumber(lottoNumbers) {
+  compareNumber(userNumbers) {
     let sameNumberCount = 0;
 
-    lottoNumbers.map((lottoNumber) => {
-      if (this.#numbers.includes(lottoNumber)) sameNumberCount += 1;
+    userNumbers.map((userNumber) => {
+      if (this.#numbers.includes(userNumber)) sameNumberCount += 1;
     });
 
     return sameNumberCount;

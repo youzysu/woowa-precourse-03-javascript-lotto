@@ -27,15 +27,15 @@ class App {
 
   inputUserMoney() {
     Console.readLine(MESSAGE.ENTER_USER_MONEY, (userMoney) => {
-      this.countOfLottos = this.lottoMachine.countOfLottos(userMoney);
+      this.countOfLottos = this.lottoMachine.countLottos(userMoney);
       this.lottoList = this.lottoMachine.makeLottoList(userMoney);
 
-      this.printLottoCount();
+      this.printLottos();
     });
   }
 
-  printLottoCount() {
-    Console.print(`\n${this.countOfLottos}` + MESSAGE.PRINT_LOTTO_COUNT);
+  printLottos() {
+    Console.print(`\n${this.countOfLottos}개를 구매했습니다.`);
     this.lottoList.forEach((lotto) => lotto.printNumbers());
 
     this.inputUserNumbers();
@@ -84,7 +84,7 @@ class App {
       5, 50, 1500, 30000, 2000000,
     ];
 
-    this.calculateResult();
+    this.countPrize();
     this.profit =
       threeProfit * this.result.three +
       fourProfit * this.result.four +
@@ -93,7 +93,7 @@ class App {
       sixProfit * this.result.six;
   }
 
-  calculateResult() {
+  countPrize() {
     this.lottoList.forEach((lotto) => {
       const lottoPrize = lotto.decidePrize(
         this.winningLottoNumbers,
