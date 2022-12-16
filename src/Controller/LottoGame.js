@@ -1,6 +1,6 @@
 const LottoMaker = require('../Model/LottoMaker');
 const Validator = require('../Util/Validator');
-const { InputView } = require('../View/IOView');
+const { InputView, OutputView } = require('../View/IOView');
 
 class LottoGame {
   #lottoMaker;
@@ -27,6 +27,12 @@ class LottoGame {
   makeLottos() {
     this.#lottoMaker.makeLottos();
     this.printLottos();
+  }
+
+  printLottos() {
+    const countOfLottos = this.#lottoMaker.getCountOfLottos();
+    const lottos = this.#lottoMaker.getLottos();
+    OutputView.printLottos(countOfLottos, lottos);
   }
 }
 
